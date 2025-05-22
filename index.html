@@ -7,18 +7,22 @@
   <style>
     body {
       font-family: sans-serif;
+      margin: 0;
+      padding: 0;
       text-align: center;
-      padding: 2em;
       background: #f7f7f7;
+    }
+    #main {
+      padding: 2em;
     }
     h1 {
       margin-bottom: 1em;
     }
     button {
-      margin: 0.5em;
+      margin: 1em;
       padding: 1em 2em;
-      font-size: 18px;
-      border-radius: 10px;
+      font-size: 20px;
+      border-radius: 12px;
       border: none;
       background-color: #16a34a;
       color: white;
@@ -27,34 +31,54 @@
     button:hover {
       background-color: #15803d;
     }
-    #qr {
-      margin-top: 2em;
+    #qr-view {
+      display: none;
+      padding: 1em;
     }
-    #qr img {
-      max-width: 300px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
+    #qr-view img {
+      width: 90vw;
+      max-width: 500px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    #back-button {
+      margin-top: 2em;
+      background-color: #999;
     }
   </style>
 </head>
 <body>
-  <h1>Vill du ge dricks?</h1>
-  <p>Klicka på ett belopp för att få en Swish QR-kod!</p>
 
-  <div>
-    <button onclick="visaQR('100')">100 kr</button>
-    <button onclick="visaQR('500')">500 kr</button>
-    <button onclick="visaQR('1000')">1000 kr</button>
+  <div id="main">
+    <h1>Vill du ge dricks?</h1>
+    <p>Klicka på ett belopp för att få en QR-kod:</p>
+    <div>
+      <button onclick="visaQR('100')">100 kr</button>
+      <button onclick="visaQR('500')">500 kr</button>
+      <button onclick="visaQR('1000')">1000 kr</button>
+    </div>
   </div>
 
-  <div id="qr"></div>
+  <div id="qr-view">
+    <p id="qr-text"></p>
+    <img id="qr-img" src="" alt="Swish QR">
+    <br>
+    <button id="back-button" onclick="tillbaka()">Tillbaka</button>
+  </div>
 
   <script>
     function visaQR(belopp) {
-      const qr = document.getElementById('qr');
-      qr.innerHTML = `<p>Scanna med Swish-appen för att betala ${belopp} kr:</p>
-                      <img src="swish-${belopp}.png" alt="Swish QR ${belopp} kr">`;
+      document.getElementById('main').style.display = 'none';
+      document.getElementById('qr-img').src = `swish-${belopp}.png`;
+      document.getElementById('qr-text').innerText = `Scanna för att swisha ${belopp} kr`;
+      document.getElementById('qr-view').style.display = 'block';
+    }
+
+    function tillbaka() {
+      document.getElementById('qr-view').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
     }
   </script>
+
 </body>
 </html>
