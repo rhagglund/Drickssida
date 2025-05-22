@@ -2,16 +2,18 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Swisha Dricks</title>
   <style>
     html, body {
       margin: 0; padding: 0; height: 100%;
-      font-family: sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(-45deg, #00d2ff, #3a47d5, #e61a1a, #f7971e);
       background-size: 400% 400%;
       animation: gradientShift 15s ease infinite;
       color: white;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     @keyframes gradientShift {
@@ -21,50 +23,56 @@
     }
 
     #main, #qr-view {
-      position: absolute; top: 0; left: 0;
+      position: fixed;
+      top: 0; left: 0;
       width: 100vw; height: 100vh;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
       background-color: rgba(0,0,0,0.35);
       transition: opacity 0.4s ease;
+      padding: 1rem;
+      box-sizing: border-box;
     }
 
     h1 {
-      font-size: 2.8em;
-      margin-bottom: 0.3em;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      font-size: 2.8rem;
+      margin-bottom: 0.3rem;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
     }
 
     #intro-text, #thank-text {
-      font-size: 1.2em;
-      margin: 0 1em 1.5em;
+      font-size: 1.2rem;
+      margin: 0 1rem 1.5rem;
       max-width: 90vw;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
     }
 
     button {
-      margin: 1em;
-      padding: 1em 2.5em;
-      font-size: 1.5em;
+      margin: 1rem;
+      padding: 1rem 2.5rem;
+      font-size: 1.5rem;
       border-radius: 15px;
       border: none;
       background-color: #16a34a;
       color: white;
       cursor: pointer;
       box-shadow: 0 6px 12px rgba(22,163,74,0.7);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.3s ease;
       user-select: none;
+      min-width: 140px;
     }
 
     button:hover {
       background-color: #22c55e;
-      transform: translateY(-5px);
-      box-shadow: 0 12px 20px rgba(22,163,74,0.9);
+      transform: translateY(-6px);
+      box-shadow: 0 14px 24px rgba(22,163,74,0.9);
     }
 
     button:active {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       box-shadow: 0 6px 12px rgba(22,163,74,0.9);
     }
 
@@ -75,29 +83,31 @@
       max-height: 100%;
       object-fit: contain;
       border-radius: 12px;
-      margin-top: 1em;
-      box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.2);
+      margin-top: 1rem;
+      box-shadow: 0 0 20px 6px rgba(255, 255, 255, 0.3);
+      background-color: white;
     }
 
     #back-button {
-      position: absolute;
+      position: fixed;
       top: 20px;
       left: 20px;
-      padding: 0.6em 1.2em;
-      font-size: 16px;
-      background-color: rgba(255, 255, 255, 0.3);
-      color: white;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background-color: rgba(255, 255, 255, 0.35);
+      color: #222;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 0 8px rgba(255,255,255,0.4);
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
       user-select: none;
       transition: background-color 0.3s ease;
-      z-index: 10;
+      z-index: 100;
+      font-weight: 600;
     }
 
     #back-button:hover {
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 255, 255, 0.6);
     }
   </style>
 </head>
@@ -119,21 +129,25 @@
 
   <script>
     function visaQR(belopp) {
+      // Byt ut swish-*.png till dina QR-bilder eller swish-länkar
       document.getElementById('qr-img').src = `swish-${belopp}.png`;
       document.getElementById('main').style.opacity = '0';
       setTimeout(() => {
         document.getElementById('main').style.display = 'none';
-        document.getElementById('qr-view').style.display = 'flex';
-        document.getElementById('qr-view').style.opacity = '1';
+        const qrView = document.getElementById('qr-view');
+        qrView.style.display = 'flex';
+        qrView.style.opacity = '1';
       }, 350);
     }
 
     function tillbaka() {
-      document.getElementById('qr-view').style.opacity = '0';
+      const qrView = document.getElementById('qr-view');
+      qrView.style.opacity = '0';
       setTimeout(() => {
-        document.getElementById('qr-view').style.display = 'none';
-        document.getElementById('main').style.display = 'flex';
-        document.getElementById('main').style.opacity = '1';
+        qrView.style.display = 'none';
+        const main = document.getElementById('main');
+        main.style.display = 'flex';
+        main.style.opacity = '1';
       }, 350);
     }
   </script>
