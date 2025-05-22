@@ -8,9 +8,9 @@
     html, body {
       margin: 0; padding: 0; height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #89f7fe, #66a6ff);
+      background: linear-gradient(to bottom right, #dbeafe, #e0e7ff);
       background-size: cover;
-      color: #ffffff;
+      color: #333;
     }
 
     #main, #qr-view {
@@ -24,14 +24,13 @@
       text-align: center;
       padding: 1rem;
       box-sizing: border-box;
-      background: rgba(0,0,0,0.4);
+      background: rgba(255, 255, 255, 0.7);
       transition: opacity 0.3s ease;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       margin-bottom: 0.5rem;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
     }
 
     #intro-text, #thank-text {
@@ -39,7 +38,6 @@
       margin-bottom: 1.5rem;
       max-width: 90%;
       line-height: 1.5;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
 
     button {
@@ -48,25 +46,20 @@
       font-size: 1.4rem;
       border-radius: 10px;
       border: none;
-      background-color: #ffffff;
-      color: #333;
+      background-color: #f3f4f6;
+      color: #111;
       cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    button:hover {
-      background-color: #eeeeee;
     }
 
     #qr-img {
-      width: 85vmin;
-      height: 85vmin;
+      width: 95vmin;
+      height: 95vmin;
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
       background-color: white;
       border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
     }
 
     #back-button {
@@ -75,7 +68,7 @@
       left: 15px;
       padding: 0.5rem 1rem;
       font-size: 1rem;
-      background-color: rgba(255, 255, 255, 0.8);
+      background-color: #e5e7eb;
       color: #333;
       border: none;
       border-radius: 8px;
@@ -86,7 +79,7 @@
 <body>
 
   <div id="main">
-    <h1>Välj dricksbelopp 💸</h1>
+    <h1>Välj dricksbelopp</h1>
     <p id="intro-text">Tack för att du uppskattar mitt arbete!</p>
     <button onclick="visaQR('100')">100 kr</button>
     <button onclick="visaQR('500')">500 kr</button>
@@ -95,7 +88,7 @@
 
   <div id="qr-view" style="display: none;">
     <button id="back-button" onclick="tillbaka()">Tillbaka</button>
-    <p id="thank-text">Tack för din generositet ❤️</p>
+    <p id="thank-text">Tack för din generositet</p>
     <img id="qr-img" src="" alt="Swish QR-kod" />
   </div>
 
