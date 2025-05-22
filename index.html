@@ -1,82 +1,75 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Swisha Dricks</title>
   <style>
     html, body {
-      margin: 0; padding: 0; height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #89f7fe, #66a6ff);
-      background-size: cover;
-      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100%;
+      background: linear-gradient(to bottom right, #dbeafe, #e0e7ff);
+      color: #333;
     }
 
     #main, #qr-view {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      display: flex;
+      display: none;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-align: center;
+      justify-content: center;
+      height: 100vh;
       padding: 1rem;
       box-sizing: border-box;
-      background: rgba(0,0,0,0.4);
-      transition: opacity 0.3s ease;
+      text-align: center;
+    }
+
+    #main {
+      display: flex;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       margin-bottom: 0.5rem;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
     }
 
     #intro-text, #thank-text {
       font-size: 1.1rem;
       margin-bottom: 1.5rem;
-      max-width: 90%;
-      line-height: 1.5;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
 
-    button {
-      margin: 0.5rem;
-      padding: 0.8rem 2rem;
-      font-size: 1.4rem;
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .button-group button {
+      width: 160px;
+      padding: 0.8rem;
+      font-size: 1.2rem;
       border-radius: 10px;
       border: none;
-      background-color: #ffffff;
-      color: #333;
+      background-color: #f3f4f6;
       cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    button:hover {
-      background-color: #eeeeee;
     }
 
     #qr-img {
-      width: 85vmin;
-      height: 85vmin;
-      max-width: 100%;
-      max-height: 100%;
+      width: 90vmin;
+      height: 90vmin;
       object-fit: contain;
-      background-color: white;
+      background: white;
       border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
     }
 
     #back-button {
-      position: fixed;
-      top: 15px;
-      left: 15px;
+      margin-top: 1rem;
       padding: 0.5rem 1rem;
       font-size: 1rem;
-      background-color: rgba(255, 255, 255, 0.8);
-      color: #333;
+      background-color: #e5e7eb;
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -86,40 +79,31 @@
 <body>
 
   <div id="main">
-    <h1>Välj dricksbelopp 💸</h1>
+    <h1>Välj dricksbelopp</h1>
     <p id="intro-text">Tack för att du uppskattar mitt arbete!</p>
-    <button onclick="visaQR('100')">100 kr</button>
-    <button onclick="visaQR('500')">500 kr</button>
-    <button onclick="visaQR('1000')">1000 kr</button>
+    <div class="button-group">
+      <button onclick="visaQR('100')">100 kr</button>
+      <button onclick="visaQR('500')">500 kr</button>
+      <button onclick="visaQR('1000')">1000 kr</button>
+    </div>
   </div>
 
-  <div id="qr-view" style="display: none;">
+  <div id="qr-view">
+    <p id="thank-text">Tack för din generositet</p>
+    <img id="qr-img" src="" alt="Swish QR-kod">
     <button id="back-button" onclick="tillbaka()">Tillbaka</button>
-    <p id="thank-text">Tack för din generositet ❤️</p>
-    <img id="qr-img" src="" alt="Swish QR-kod" />
   </div>
 
   <script>
     function visaQR(belopp) {
       document.getElementById('qr-img').src = `swish-${belopp}.png`;
-      document.getElementById('main').style.opacity = '0';
-      setTimeout(() => {
-        document.getElementById('main').style.display = 'none';
-        const qrView = document.getElementById('qr-view');
-        qrView.style.display = 'flex';
-        qrView.style.opacity = '1';
-      }, 300);
+      document.getElementById('main').style.display = 'none';
+      document.getElementById('qr-view').style.display = 'flex';
     }
 
     function tillbaka() {
-      const qrView = document.getElementById('qr-view');
-      qrView.style.opacity = '0';
-      setTimeout(() => {
-        qrView.style.display = 'none';
-        const main = document.getElementById('main');
-        main.style.display = 'flex';
-        main.style.opacity = '1';
-      }, 300);
+      document.getElementById('qr-view').style.display = 'none';
+      document.getElementById('main').style.display = 'flex';
     }
   </script>
 
