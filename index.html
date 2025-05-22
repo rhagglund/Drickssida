@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ge Dricks med Swish</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      color: #333;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+    }
+    .btn {
+      display: inline-block;
+      margin: 15px;
+      padding: 20px 35px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: white;
+      background: #00b383;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      transition: transform 0.2s, background 0.3s;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background: #009970;
+      transform: scale(1.05);
+    }
+    .footer {
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>Vill du ge dricks?</h1>
+  <p>Klicka på en knapp nedan för att öppna Swish med rätt belopp förifyllt.</p>
+
+  <a class="btn" href="swish://payment?version=1&payee=0733998003&amount=100&message=Dricks">100 kr</a>
+  <a class="btn" href="swish://payment?version=1&payee=0733998003&amount=500&message=Dricks">500 kr</a>
+  <a class="btn" href="swish://payment?version=1&payee=0733998003&amount=1000&message=Dricks">1000 kr</a>
+
+  <div class="footer">
+    Swishnummer: <strong>073-399 80 03</strong>
+  </div>
+</body>
+</html>
