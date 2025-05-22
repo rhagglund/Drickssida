@@ -2,24 +2,15 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Swisha Dricks</title>
   <style>
     html, body {
       margin: 0; padding: 0; height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(-45deg, #00d2ff, #3a47d5, #e61a1a, #f7971e);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-      color: white;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    @keyframes gradientShift {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      background: linear-gradient(to bottom right, #89f7fe, #66a6ff);
+      background-size: cover;
+      color: #ffffff;
     }
 
     #main, #qr-view {
@@ -31,91 +22,72 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      background-color: rgba(0,0,0,0.35);
-      transition: opacity 0.4s ease;
       padding: 1rem;
       box-sizing: border-box;
+      background: rgba(0,0,0,0.4);
+      transition: opacity 0.3s ease;
     }
 
     h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.3rem;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
     }
 
     #intro-text, #thank-text {
-      font-size: 1.2rem;
-      margin: 0 1rem 1.5rem;
-      max-width: 90vw;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      max-width: 90%;
+      line-height: 1.5;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
 
     button {
-      margin: 1rem;
-      padding: 1rem 2.5rem;
-      font-size: 1.5rem;
-      border-radius: 15px;
+      margin: 0.5rem;
+      padding: 0.8rem 2rem;
+      font-size: 1.4rem;
+      border-radius: 10px;
       border: none;
-      background-color: #16a34a;
-      color: white;
+      background-color: #ffffff;
+      color: #333;
       cursor: pointer;
-      box-shadow: 0 6px 12px rgba(22,163,74,0.7);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.3s ease;
-      user-select: none;
-      min-width: 140px;
+      transition: background-color 0.2s ease;
     }
 
     button:hover {
-      background-color: #22c55e;
-      transform: translateY(-6px);
-      box-shadow: 0 14px 24px rgba(22,163,74,0.9);
-    }
-
-    button:active {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(22,163,74,0.9);
+      background-color: #eeeeee;
     }
 
     #qr-img {
-      width: 90vmin;
-      height: 90vmin;
+      width: 85vmin;
+      height: 85vmin;
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      border-radius: 12px;
-      margin-top: 1rem;
-      box-shadow: 0 0 20px 6px rgba(255, 255, 255, 0.3);
       background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
 
     #back-button {
       position: fixed;
-      top: 20px;
-      left: 20px;
-      padding: 0.6rem 1.2rem;
+      top: 15px;
+      left: 15px;
+      padding: 0.5rem 1rem;
       font-size: 1rem;
-      background-color: rgba(255, 255, 255, 0.35);
-      color: #222;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #333;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 0 10px rgba(255,255,255,0.5);
-      user-select: none;
-      transition: background-color 0.3s ease;
-      z-index: 100;
-      font-weight: 600;
-    }
-
-    #back-button:hover {
-      background-color: rgba(255, 255, 255, 0.6);
     }
   </style>
 </head>
 <body>
 
   <div id="main">
-    <h1>Välj dricksbelopp</h1>
-    <p id="intro-text">Tack för att du överväger att ge dricks – det betyder mycket!</p>
+    <h1>Välj dricksbelopp 💸</h1>
+    <p id="intro-text">Tack för att du uppskattar mitt arbete!</p>
     <button onclick="visaQR('100')">100 kr</button>
     <button onclick="visaQR('500')">500 kr</button>
     <button onclick="visaQR('1000')">1000 kr</button>
@@ -123,13 +95,12 @@
 
   <div id="qr-view" style="display: none;">
     <button id="back-button" onclick="tillbaka()">Tillbaka</button>
-    <p id="thank-text">Tack för att du uppskattar mitt arbete!</p>
+    <p id="thank-text">Tack för din generositet ❤️</p>
     <img id="qr-img" src="" alt="Swish QR-kod" />
   </div>
 
   <script>
     function visaQR(belopp) {
-      // Byt ut swish-*.png till dina QR-bilder eller swish-länkar
       document.getElementById('qr-img').src = `swish-${belopp}.png`;
       document.getElementById('main').style.opacity = '0';
       setTimeout(() => {
@@ -137,7 +108,7 @@
         const qrView = document.getElementById('qr-view');
         qrView.style.display = 'flex';
         qrView.style.opacity = '1';
-      }, 350);
+      }, 300);
     }
 
     function tillbaka() {
@@ -148,7 +119,7 @@
         const main = document.getElementById('main');
         main.style.display = 'flex';
         main.style.opacity = '1';
-      }, 350);
+      }, 300);
     }
   </script>
 
