@@ -94,6 +94,13 @@
       border-radius: 8px;
       cursor: pointer;
     }
+
+    .finstilt {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-top: 1rem;
+      max-width: 300px;
+    }
   </style>
 </head>
 <body>
@@ -133,11 +140,12 @@
       document.getElementById("qr-view").style.display = 'flex';
       document.getElementById("qr-img").src = "swish-100.png";
 
-      if (valt < 100) {
-        thankText.innerHTML = `Du valde ${valt} kr, men vi rundade upp till 100 kr. 😅`;
-      } else {
-        thankText.innerHTML = `Du valde ${valt} kr. Du är fantastisk! 🙌`;
-      }
+      thankText.innerHTML = `
+        Du valde ${valt} kr.<br><br>
+        <span class="finstilt">
+          P.g.a. att summan översteg 0 kr avrundas den till närmaste hundratal (100 kr).
+        </span>
+      `;
     }
 
     function tillbaka() {
