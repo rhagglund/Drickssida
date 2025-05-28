@@ -1,17 +1,113 @@
-<!-- Behåll <head> och stil som du redan har, men ersätt <body>-innehållet med detta -->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Swisha Dricks</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(to bottom right, #0f172a, #1e293b);
+      color: #fff;
+    }
 
+    #main, #qr-view {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem 1rem;
+      box-sizing: border-box;
+    }
+
+    #main {
+      display: flex;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      margin-bottom: 1rem;
+    }
+
+    #intro-text, #thank-text {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 320px;
+    }
+
+    .slider-wrapper {
+      width: 100%;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin: 1rem 0;
+    }
+
+    .amount-display {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .button {
+      width: 180px;
+      padding: 0.9rem;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #2563eb;
+    }
+
+    #qr-img {
+      width: 90vmin;
+      height: 90vmin;
+      max-width: 300px;
+      max-height: 300px;
+      object-fit: contain;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    #back-button {
+      margin-top: 2rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      background-color: #f1f5f9;
+      color: #1e293b;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
 <body>
 
   <div id="main">
     <h1>Välj dricksbelopp 💸</h1>
     <p id="intro-text">Tack för att du uppskattar mitt arbete!</p>
 
-    <div style="width: 80%; max-width: 400px;">
-      <input type="range" id="slider" min="1" max="100" value="50" style="width: 100%;">
-      <p style="font-size: 1.5rem; margin-top: 1rem;">
+    <div class="slider-wrapper">
+      <input type="range" id="slider" min="1" max="100" value="50">
+      <div class="amount-display">
         Du har valt: <span id="valt-belopp">50</span> kr
-      </p>
-      <button onclick="godkänn()">Godkänn</button>
+      </div>
+      <button class="button" onclick="godkänn()">Godkänn</button>
     </div>
   </div>
 
@@ -51,3 +147,4 @@
   </script>
 
 </body>
+</html>
