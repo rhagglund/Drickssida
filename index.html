@@ -1,119 +1,53 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Swisha Dricks</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: linear-gradient(to bottom right, #0f172a, #1e293b);
-      color: #fff;
-    }
+<!-- Behåll <head> och stil som du redan har, men ersätt <body>-innehållet med detta -->
 
-    #main, #qr-view {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      padding: 1rem;
-      box-sizing: border-box;
-    }
-
-    #main {
-      display: flex;
-    }
-
-    h1 {
-      font-size: 2.3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    #intro-text, #thank-text {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .button-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      align-items: center;
-    }
-
-    .button-group button {
-      width: 160px;
-      padding: 0.8rem;
-      font-size: 1.2rem;
-      border-radius: 10px;
-      border: none;
-      background-color: #3b82f6;
-      color: white;
-      cursor: pointer;
-    }
-
-    .button-group button:hover {
-      background-color: #2563eb;
-    }
-
-    #qr-img {
-      width: 95vmin;
-      height: 95vmin;
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-
-    #back-button {
-      margin-top: 1.5rem;
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      background-color: #f1f5f9;
-      color: #1e293b;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-  </style>
-</head>
 <body>
 
   <div id="main">
     <h1>Välj dricksbelopp 💸</h1>
     <p id="intro-text">Tack för att du uppskattar mitt arbete!</p>
-    <div class="button-group">
-      <button onclick="visaQR('100')">100 kr</button>
-      <button onclick="visaQR('500')">500 kr</button>
-      <button onclick="visaQR('1000')">1000 kr</button>
+
+    <div style="width: 80%; max-width: 400px;">
+      <input type="range" id="slider" min="1" max="100" value="50" style="width: 100%;">
+      <p style="font-size: 1.5rem; margin-top: 1rem;">
+        Du har valt: <span id="valt-belopp">50</span> kr
+      </p>
+      <button onclick="godkänn()">Godkänn</button>
     </div>
   </div>
 
   <div id="qr-view">
     <h1>Tack för din generositet ❤️</h1>
+    <p id="thank-text"></p>
     <img id="qr-img" src="" alt="Swish QR-kod">
     <button id="back-button" onclick="tillbaka()">Tillbaka</button>
   </div>
 
   <script>
-    function visaQR(belopp) {
-      document.getElementById('qr-img').src = `swish-${belopp}.png`;
-      document.getElementById('main').style.display = 'none';
-      document.getElementById('qr-view').style.display = 'flex';
+    const slider = document.getElementById("slider");
+    const valtBeloppSpan = document.getElementById("valt-belopp");
+    const thankText = document.getElementById("thank-text");
+
+    slider.addEventListener("input", function () {
+      valtBeloppSpan.textContent = slider.value;
+    });
+
+    function godkänn() {
+      const valt = parseInt(slider.value);
+      document.getElementById("main").style.display = 'none';
+      document.getElementById("qr-view").style.display = 'flex';
+      document.getElementById("qr-img").src = "swish-100.png";
+
+      if (valt < 100) {
+        thankText.innerHTML = `Du valde ${valt} kr, men vi rundade upp till 100 kr. 😅`;
+      } else {
+        thankText.innerHTML = `Du valde ${valt} kr. Du är fantastisk! 🙌`;
+      }
     }
 
     function tillbaka() {
-      document.getElementById('qr-view').style.display = 'none';
-      document.getElementById('main').style.display = 'flex';
+      document.getElementById("qr-view").style.display = 'none';
+      document.getElementById("main").style.display = 'flex';
     }
   </script>
 
 </body>
-</html>
